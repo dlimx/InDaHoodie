@@ -18,6 +18,9 @@
 .env.test.local
 .env.production.local
 
+# Google Drive adds Icon files to folders
+Icon?
+
 .idea
 
 npm-debug.log*
