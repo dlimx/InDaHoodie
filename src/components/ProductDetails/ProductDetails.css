@@ -1,0 +1,26 @@
+.ProductDetailsContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProductDetailsImage {
+  height: 600px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ProductDetailsText {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ProductDetailsDisabled {
+  opacity: 0.5;
+}
+
+.ProductDetailsDisabled:hover {
+  cursor: default;
+}
