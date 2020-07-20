@@ -1,13 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+
+import './Navbar.css';
+import Icon from '../shared/Icon';
+import { useCart } from '../../store/CartProvider';
 
 export default function Navbar() {
+  const [cart] = useCart();
+
   return (
-    <div>
-      <Link to="/">Products</Link>
-      <Link to="/cart">Cart</Link>
-      <Link to="/product/1">Example Product</Link>
-      <Link to="/history">Shopping History</Link>
-    </div>
+    <nav className="container navbar navbar-light fixed-top">
+      <div className="navbar-brand">
+        <Link className="NavbarMain" to="/">
+          InDaHoodie
+        </Link>
+      </div>
+      <div>
+        <NavLink className="Navbar" activeClassName="NavbarActive" exact to="/">
+          Products
+        </NavLink>
+        <NavLink
+          className="Navbar"
+          activeClassName="NavbarActive"
+          to="/history"
+        >
+          History
+        </NavLink>
+        <NavLink className="Navbar" activeClassName="NavbarActive" to="/cart">
+          <Icon icon="fa-shopping-cart" />
+          <span> ({cart.items.length})</span>
+        </NavLink>
+      </div>
+    </nav>
   );
 }

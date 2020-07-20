@@ -1,5 +1,5 @@
 export const initialState = {
-  hello: 'world',
+  items: [],
 };
 
 export default function cartReducer(state = initialState, action) {

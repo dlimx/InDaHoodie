@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background-light);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.navbar {
+  height: 100px;
+  background-color: var(--color-background-light);
+}
+
+.MainContainer {
+  padding-top: 150px;
+}
+
+:root {
+  --color-white: #ffffff;
+  --color-primary: #007bff;
+  --color-secondary: #05b2dc;
+  --color-tertiary: #c9cba3;
+  --color-text: #464646;
+  --color-text-hover: #ccc;
+  --color-text-header: #636363;
+  --color-text-light: #ffffff;
+  --color-text-light-hover: #d9d9d9;
+  --color-text-medium: #d9d9d9;
+  --color-text-medium-hover: #fff;
+  --color-grey: #ccc;
+  --color-background-light: #f8f8f8;
+}
