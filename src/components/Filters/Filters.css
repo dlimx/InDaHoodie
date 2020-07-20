@@ -1,0 +1,25 @@
+.FilterTitle {
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+.FilterItem {
+  margin-right: 20px;
+}
+
+.FilterSection {
+  padding-bottom: 40px;
+}
+
+.FilterRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.FilterForm {
+  padding-top: 40px;
+}
+
+.FilterFormInput {
+  margin-right: 20px;
+}

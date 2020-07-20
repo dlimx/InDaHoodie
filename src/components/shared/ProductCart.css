@@ -6,6 +6,12 @@
   align-items: center;
 }
 
+.ProductCard:active,
+.ProductCard:focus {
+  outline: 0;
+  border: none;
+}
+
 .ProductIconContainer {
   height: 280px;
   width: 280px;

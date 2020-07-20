@@ -22,6 +22,13 @@ export default function Navbar() {
         <NavLink
           className="Navbar"
           activeClassName="NavbarActive"
+          to="/filters"
+        >
+          Filters
+        </NavLink>
+        <NavLink
+          className="Navbar"
+          activeClassName="NavbarActive"
           to="/history"
         >
           History

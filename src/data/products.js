@@ -7,7 +7,7 @@ export const productData = [
     name: 'White T-Shirt',
     image: '',
     price: 20000,
-    designers: [designerData[0]],
+    designer: designerData[0],
     categories: [categoryData[0]],
   },
   {
@@ -15,7 +15,6 @@ export const productData = [
     name: 'Goretex Jacket',
     image: '',
     price: 60000,
-    designers: [],
     categories: [categoryData[3]],
   },
   {
@@ -23,7 +22,7 @@ export const productData = [
     name: 'Grey Sweater',
     image: '',
     price: 33000,
-    designers: [designerData[1]],
+    designer: designerData[1],
     categories: [categoryData[2]],
   },
   {
@@ -31,7 +30,7 @@ export const productData = [
     name: 'Heron Preston x InDaHoodie Joggers',
     image: '',
     price: 40000,
-    designers: [designerData[1], designerData[0]],
+    designer: designerData[1],
     categories: [categoryData[2]],
   },
   {
@@ -39,7 +38,6 @@ export const productData = [
     name: 'InDaHoodie Hoodie',
     image: '',
     price: 15000,
-    designers: [],
     categories: [categoryData[2]],
   },
   {
@@ -47,7 +45,6 @@ export const productData = [
     name: 'InDaHoodie Tank',
     image: '',
     price: 5000,
-    designers: [],
     categories: [categoryData[0]],
   },
   {
@@ -55,7 +52,7 @@ export const productData = [
     name: 'Vera Wang x InDaHoodie Track Jacket',
     image: '',
     price: 45000,
-    designers: [designerData[4]],
+    designer: designerData[4],
     categories: [categoryData[3]],
   },
 ];

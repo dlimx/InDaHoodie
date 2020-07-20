@@ -6,6 +6,7 @@ import Icon from '../shared/Icon';
 import './ProductDetails.css';
 import { useCart } from '../../store/CartProvider';
 import { addToCart } from '../../store/cartActions';
+import { renderPrice } from '../../util/util';
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -69,14 +70,12 @@ export default function ProductDetails() {
         <Icon icon="fa-camera" className="fa-5x" />
       </div>
       <div className="ProductDetailsText">
-        <h3>{product?.name}</h3>
-        <strong>${Math.floor(product.price / 100)}</strong>
+        <h3>{product.name}</h3>
+        <strong>${renderPrice(product.price)}</strong>
         <br />
-        {product.designers?.length ? (
-          <span>
-            {product.designers.map((designer) => designer.name).join(', ')}
-          </span>
-        ) : null}
+        <p>{product.description}</p>
+        <br />
+        {product.designer?.name ? <span>{product.designer.name}</span> : null}
         <br />
         {product.categories?.length ? (
           <span>

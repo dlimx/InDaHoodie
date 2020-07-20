@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useCart } from '../../store/CartProvider';
+import { useHistory } from 'react-router-dom';
 import api from '../../api/api';
 import { productData } from '../../data/products';
 import ProductCard from '../shared/ProductCard';
 import './Products.css';
+import Icon from '../shared/Icon';
 
 export default function Products() {
-  const [state, dispatch] = useCart();
-
   const [products, setProducts] = useState([]);
   const [activeProducts, setActiveProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     api.get('/product').then(({ data }) => {
@@ -26,6 +26,18 @@ export default function Products() {
     );
     setActiveProducts(data);
   }, [products, searchText]);
+
+  const onClickAdd = (e) => {
+    e.preventDefault();
+    history.push('/product-add');
+  };
+
+  const onKeyDownAdd = (e) => {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      history.push('/product-add');
+    }
+  };
 
   return (
     <div style={{ width: '100%' }}>
@@ -45,6 +57,20 @@ export default function Products() {
         {activeProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
+        <div
+          className="ProductCard"
+          role="button"
+          onClick={onClickAdd}
+          onKeyDown={onKeyDownAdd}
+          tabIndex={0}
+        >
+          <div className="card ProductIconContainer ProductAddCard">
+            <Icon icon="fa-camera" className="fa-3x" />
+          </div>
+          <div className="ProductTextContainer ProductAddCardText">
+            <h5>Add New Product</h5>
+          </div>
+        </div>
       </div>
     </div>
   );

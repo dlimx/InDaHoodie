@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 
 import './ProductCart.css';
 import Icon from './Icon';
+import { renderPrice } from '../../util/util';
 
 export default function ProductCart({ product }) {
   const route = `/product/${product.id}`;
@@ -36,12 +37,8 @@ export default function ProductCart({ product }) {
         <Link to={route}>
           <h5>{product.name}</h5>
         </Link>
-        <strong>${Math.floor(product.price / 100)}</strong>
-        {product.designers?.length ? (
-          <span>
-            {product.designers.map((designer) => designer.name).join(', ')}
-          </span>
-        ) : null}
+        <strong>${renderPrice(product.price)}</strong>
+        {product.designer?.name ? <span>{product.designer.name}</span> : null}
         {product.categories?.length ? (
           <span>
             {product.categories.map((category) => category.name).join(', ')}
@@ -56,7 +53,7 @@ ProductCart.propTypes = {
   product: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    designers: PropTypes.array,
+    designer: PropTypes.object,
     categories: PropTypes.array,
   }).isRequired,
 };
