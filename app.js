@@ -10,6 +10,17 @@ const apiRouter = require('./routes');
 
 const app = express();
 
+app.use('*', (req, res, next) => {
+  if (
+    req.headers['x-forwarded-proto'] !== 'https' &&
+    process.env.NODE_ENV === 'production'
+  ) {
+    res.redirect(`https://${req.hostname}${req.url}`);
+  } else {
+    next(); /* Continue to other routes if we're not redirecting */
+  }
+});
+
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,17 +29,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api', apiRouter);
-app.get('/*', function (req, res) {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
