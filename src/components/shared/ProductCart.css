@@ -1,0 +1,22 @@
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  flex: 1;
+  align-items: center;
+}
+
+.ProductIconContainer {
+  height: 280px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProductTextContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 280px;
+}

@@ -9,7 +9,7 @@ import ShoppingCart from './ShoppingCart/ShoppingCart';
 export default function Router() {
   return (
     <BrowserRouter>
-      <div>
+      <main className="container MainContainer">
         <Navbar />
         <Switch>
           <Route path="/history">
@@ -25,7 +25,7 @@ export default function Router() {
             <Products />
           </Route>
         </Switch>
-      </div>
+      </main>
     </BrowserRouter>
   );
 }

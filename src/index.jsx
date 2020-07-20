@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './theme/theme.css';
 import * as serviceWorker from './serviceWorker';
 import CartProvider from './store/CartProvider';
 import Router from './components/Router';
