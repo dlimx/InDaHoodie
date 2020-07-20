@@ -13,7 +13,7 @@ export default function Products() {
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
-    api.get('/products').then(({ data }) => {
+    api.get('/product').then(({ data }) => {
       // TODO - replace with real data
       setProducts(productData);
       setActiveProducts(productData);
