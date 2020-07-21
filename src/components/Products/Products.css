@@ -9,3 +9,21 @@
   width: 100%;
   max-width: 100%;
 }
+
+.ProductIconContainer {
+  height: 280px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProductAddCard {
+  border-style: dashed;
+  border-width: 2px;
+  opacity: 50%;
+}
+
+.ProductAddCardText {
+  opacity: 65%;
+}

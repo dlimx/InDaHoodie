@@ -22,6 +22,20 @@ code {
   padding-top: 120px;
 }
 
+.Header {
+  color: var(--color-text);
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.Row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 :root {
   --color-white: #ffffff;
   --color-primary: #007bff;
@@ -35,5 +49,5 @@ code {
   --color-text-medium: #d9d9d9;
   --color-text-medium-hover: #fff;
   --color-grey: #ccc;
-  --color-background-light: #f8f8f8;
+  --color-background-light: #fafafa;
 }
