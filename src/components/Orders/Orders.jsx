@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import OrderCard from '../shared/OrderCard';
 import { orderData } from '../../data/orders';
@@ -17,6 +18,9 @@ export default function Orders() {
 
   return (
     <div>
+      <Helmet>
+        <title>InDaHoodie | Orders</title>
+      </Helmet>
       {orders.map((order, index) => (
         <OrderCard order={order} key={order.id} />
       ))}

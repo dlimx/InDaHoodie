@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import * as yup from 'yup';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import api from '../../api/api';
 import ProductForm from '../ProductForm/ProductForm';
@@ -16,6 +16,9 @@ export default function ProductAdd() {
 
   return (
     <div>
+      <Helmet>
+        <title>InDaHoodie | Add Product</title>
+      </Helmet>
       <h2>Add Product</h2>
       <ProductForm onSubmit={onSubmit} submitText="Add Product" />
     </div>

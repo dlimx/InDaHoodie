@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import { customerData } from '../../data/customers';
 import CustomerCard from '../shared/CustomerCard';
@@ -30,6 +31,9 @@ export default function Customers() {
 
   return (
     <div>
+      <Helmet>
+        <title>InDaHoodie | Customers</title>
+      </Helmet>
       {customers.map((customer, index) => (
         <CustomerCard customer={customer} index={index} key={customer.id} />
       ))}

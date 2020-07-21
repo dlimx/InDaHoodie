@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import { orderData } from '../../data/orders';
 import { getPrice, getTotalQuantity } from '../../util/util';
@@ -23,6 +24,9 @@ export default function OrderDetails() {
 
   return (
     <div>
+      <Helmet>
+        <title>InDaHoodie | Orders</title>
+      </Helmet>
       <h2>{order?.customer?.first_name}&apos;s Order</h2>
       <strong>
         Total of {total} item{total === 1 ? '' : 's'}
