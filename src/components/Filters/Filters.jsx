@@ -13,12 +13,12 @@ export default function Filters() {
   const [designerName, setDesignerName] = useState('');
 
   useEffect(() => {
-    api.get(`/categories`).then(({ data }) => {
+    api.get(`/category`).then(({ data }) => {
       // TODO - replace with real data
       setCategories(categoryData);
     });
 
-    api.get(`/designers`).then(({ data }) => {
+    api.get(`/designer`).then(({ data }) => {
       // TODO - replace with real data
       setDesigners(designerData);
     });
@@ -37,7 +37,7 @@ export default function Filters() {
   const onCategorySubmit = (e) => {
     e.preventDefault();
     if (!categoryName || !categoryName.trim()) return;
-    api.post('/categories', { name: categoryName }).then(({ data }) => {
+    api.post('/category', { name: categoryName }).then(({ data }) => {
       setCategories([...categories, data]);
       setCategoryName('');
     });
@@ -46,7 +46,7 @@ export default function Filters() {
   const onDesignerSubmit = (e) => {
     e.preventDefault();
     if (!designerName || !designerName.trim()) return;
-    api.post('/designers', { name: designerName }).then(({ data }) => {
+    api.post('/designer', { name: designerName }).then(({ data }) => {
       setDesigners([...designers, data]);
       setDesignerName('');
     });

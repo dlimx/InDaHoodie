@@ -36,6 +36,34 @@ code {
   align-items: center;
 }
 
+.Separator {
+  width: 40px;
+}
+
+.AddForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.AddFormInput {
+  margin-bottom: 20px;
+}
+
+.AddFormInputLabel {
+  margin-bottom: 20px;
+  margin-right: 10px;
+  text-wrap: none;
+  white-space: nowrap;
+}
+
+.AddFormInputArea {
+  height: 300px;
+}
+
+.AddButton {
+  align-self: flex-end;
+}
+
 :root {
   --color-white: #ffffff;
   --color-primary: #007bff;

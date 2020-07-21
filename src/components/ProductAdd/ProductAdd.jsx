@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import { useHistory } from 'react-router-dom';
 
-import './ProductAdd.css';
 import api from '../../api/api';
 
 export default function ProductAdd() {
@@ -12,6 +11,7 @@ export default function ProductAdd() {
   const [description, setDescription] = useState('');
   const [designer, setDesigner] = useState('');
   const [category, setCategory] = useState('');
+  const [image, setImage] = useState('');
   const [price, setPrice] = useState(0);
   const [error, setError] = useState('');
 
@@ -21,6 +21,7 @@ export default function ProductAdd() {
       description: yup.string(),
       designer: yup.string(),
       category: yup.string(),
+      image: yup.string(),
       price: yup.number().required(),
     });
     return schema.validate(data);
@@ -46,6 +47,10 @@ export default function ProductAdd() {
     e.preventDefault();
     setCategory(e.target.value);
   };
+  const onImageChange = (e) => {
+    e.preventDefault();
+    setImage(e.target.value);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -69,28 +74,28 @@ export default function ProductAdd() {
   };
 
   return (
-    <div className="ProductAddForm">
+    <div className="AddForm">
       <h1>Add Product</h1>
       <div className="form-group">
         <input
           type="text"
-          className="form-control ProductAddFormInput"
+          className="form-control AddFormInput"
           placeholder="Name"
           value={name}
           onChange={onNameChange}
         />
         <textarea
           type="text"
-          className="form-control ProductAddFormInput ProductAddFormInputArea"
+          className="form-control AddFormInput AddFormInputArea"
           placeholder="Description"
           value={description}
           onChange={onDescriptionChange}
         />
         <div className="Row">
-          <span className="ProductAddFormInputLabel">Price:</span>
+          <span className="AddFormInputLabel">Price:</span>
           <input
             type="number"
-            className="form-control ProductAddFormInput"
+            className="form-control AddFormInput"
             placeholder="Price"
             value={price}
             onChange={onPriceChange}
@@ -98,23 +103,30 @@ export default function ProductAdd() {
         </div>
         <input
           type="text"
-          className="form-control ProductAddFormInput"
+          className="form-control AddFormInput"
           placeholder="Designer"
           value={designer}
           onChange={onDesignerChange}
         />
         <input
           type="text"
-          className="form-control ProductAddFormInput"
+          className="form-control AddFormInput"
           placeholder="Category(s)"
           value={category}
           onChange={onCategoryChange}
+        />
+        <input
+          type="text"
+          className="form-control AddFormInput"
+          placeholder="Image"
+          value={image}
+          onChange={onImageChange}
         />
         {error ? <p className="text-danger">{error}</p> : null}
       </div>
       <button
         type="submit"
-        className="btn btn-primary ProductAddButton"
+        className="btn btn-primary AddButton"
         onClick={onSubmit}
       >
         Add Product

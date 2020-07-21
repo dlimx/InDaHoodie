@@ -8,6 +8,8 @@ import ShoppingCart from './ShoppingCart/ShoppingCart';
 import Filters from './Filters/Filters';
 import ProductAdd from './ProductAdd/ProductAdd';
 import OrderDetails from './OrderDetails/OrderDetails';
+import Customers from './Customers/Customers';
+import CustomerAdd from './CustomerAdd/CustomerAdd';
 
 export default function Router() {
   return (
@@ -15,16 +17,22 @@ export default function Router() {
       <main className="container MainContainer">
         <Navbar />
         <Switch>
-          <Route path="/history:/:id">
+          <Route path="/customer-add">
+            <CustomerAdd />
+          </Route>
+          <Route path="/customer">
+            <Customers />
+          </Route>
+          <Route path="/order/:id">
             <OrderDetails />
           </Route>
-          <Route path="/history">
+          <Route path="/order">
             <Orders />
           </Route>
           <Route path="/cart">
             <ShoppingCart />
           </Route>
-          <Route path="/filters">
+          <Route path="/filter">
             <Filters />
           </Route>
           <Route path="/product-add">

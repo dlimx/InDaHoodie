@@ -19,19 +19,18 @@ export default function Navbar() {
         <NavLink className="Navbar" activeClassName="NavbarActive" exact to="/">
           Products
         </NavLink>
-        <NavLink
-          className="Navbar"
-          activeClassName="NavbarActive"
-          to="/filters"
-        >
+        <NavLink className="Navbar" activeClassName="NavbarActive" to="/filter">
           Filters
+        </NavLink>
+        <NavLink className="Navbar" activeClassName="NavbarActive" to="/order">
+          Orders
         </NavLink>
         <NavLink
           className="Navbar"
           activeClassName="NavbarActive"
-          to="/history"
+          to="/customer"
         >
-          History
+          Customers
         </NavLink>
         <NavLink className="Navbar" activeClassName="NavbarActive" to="/cart">
           <Icon icon="fa-shopping-cart" />
