@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Filters.css';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import { categoryData } from '../../data/categories';
 import { designerData } from '../../data/designers';
@@ -54,6 +55,9 @@ export default function Filters() {
 
   return (
     <>
+      <Helmet>
+        <title>InDaHoodie | Product Filters</title>
+      </Helmet>
       <div className="FilterSection">
         <h1 className="Header FilterTitle">Categories</h1>
         {categories.map((category) => (

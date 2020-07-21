@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { useCart } from '../../store/CartProvider';
 import OrderProductCard from '../shared/OrderProductCard';
 import { resetCart } from '../../store/cartActions';
@@ -34,6 +35,9 @@ export default function OrderCart() {
 
   return (
     <div>
+      <Helmet>
+        <title>InDaHoodie | Cart</title>
+      </Helmet>
       <div className="Row">
         <button
           type="button"

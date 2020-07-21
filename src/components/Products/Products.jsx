@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import { productData } from '../../data/products';
 import ProductCard from '../shared/ProductCard';
@@ -41,6 +42,9 @@ export default function Products() {
 
   return (
     <div style={{ width: '100%' }}>
+      <Helmet>
+        <title>InDaHoodie | Products</title>
+      </Helmet>
       <div className="ProductsSearchContainer sticky-top input-group input-group-lg">
         <input
           type="text"

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import { productData } from '../../data/products';
 import Icon from '../shared/Icon';
@@ -71,6 +72,9 @@ export default function ProductDetails() {
 
   return (
     <div className="ProductDetailsContainer">
+      <Helmet>
+        <title>InDaHoodie | Products</title>
+      </Helmet>
       <div className="card ProductDetailsImage">
         <Icon icon="fa-camera" className="fa-5x" />
       </div>
