@@ -1,0 +1,20 @@
+.CustomerCard {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.CustomerCardContent {
+  padding: 20px;
+}
+
+.CustomerCardImage {
+  height: 240px;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-text-medium);
+  color: var(--color-text-header);
+}

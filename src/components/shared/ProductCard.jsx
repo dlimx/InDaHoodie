@@ -28,7 +28,6 @@ export default function ProductCart({ product }) {
       role="button"
       onClick={onClick}
       onKeyDown={onKeyDown}
-      tabIndex={0}
     >
       <div className="card ProductIconContainer">
         <Icon icon="fa-camera" className="fa-3x" />
@@ -51,6 +50,7 @@ export default function ProductCart({ product }) {
 
 ProductCart.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     designer: PropTypes.object,

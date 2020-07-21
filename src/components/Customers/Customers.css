@@ -1,0 +1,11 @@
+.CustomerAddCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  opacity: 60%;
+}
+
+.CustomerAddCardTitle {
+  margin: 0;
+}
