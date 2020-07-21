@@ -30,7 +30,6 @@ export default function Customers() {
 
   return (
     <div>
-      <h2>Customers</h2>
       {customers.map((customer, index) => (
         <CustomerCard customer={customer} index={index} key={customer.id} />
       ))}
