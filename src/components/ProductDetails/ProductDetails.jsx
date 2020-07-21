@@ -64,13 +64,23 @@ export default function ProductDetails() {
     history.push('/cart');
   };
 
+  const onEdit = (e) => {
+    e.preventDefault();
+    history.push(`/product/${id}/edit`);
+  };
+
   return (
     <div className="ProductDetailsContainer">
       <div className="card ProductDetailsImage">
         <Icon icon="fa-camera" className="fa-5x" />
       </div>
       <div className="ProductDetailsText">
-        <h2>{product.name}</h2>
+        <div className="Row RowSpaced">
+          <h2>{product.name}</h2>
+          <button type="button" onClick={onEdit} className="btn btn-outline">
+            <Icon icon="fa-edit" className="fa-2x" />
+          </button>
+        </div>
         <strong>${getPrice(product.price)}</strong>
         <br />
         <p>{product.description}</p>

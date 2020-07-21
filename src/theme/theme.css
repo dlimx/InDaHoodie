@@ -36,6 +36,10 @@ code {
   align-items: center;
 }
 
+.RowSpaced {
+  justify-content: space-between;
+}
+
 .Separator {
   width: 40px;
 }

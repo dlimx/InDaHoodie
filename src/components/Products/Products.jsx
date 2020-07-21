@@ -29,13 +29,13 @@ export default function Products() {
 
   const onClickAdd = (e) => {
     e.preventDefault();
-    history.push('/product-add');
+    history.push('/product/add');
   };
 
   const onKeyDownAdd = (e) => {
     e.preventDefault();
     if (e.keyCode === 13) {
-      history.push('/product-add');
+      history.push('/product/add');
     }
   };
 
