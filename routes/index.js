@@ -12,5 +12,10 @@ router.get('*', (req, res, next) => {
 router.post('*', (req, res, next) => {
   res.send({ name: 'hello world' });
 });
+/* PUT api index */
+// TODO - drop star
+router.put('*', (req, res, next) => {
+  res.send({ name: 'hello world' });
+});
 
 module.exports = router;

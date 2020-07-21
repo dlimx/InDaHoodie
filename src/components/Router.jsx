@@ -10,6 +10,7 @@ import ProductAdd from './ProductAdd/ProductAdd';
 import OrderDetails from './OrderDetails/OrderDetails';
 import Customers from './Customers/Customers';
 import CustomerAdd from './CustomerAdd/CustomerAdd';
+import ProductEdit from './ProductEdit/ProductEdit';
 
 export default function Router() {
   return (
@@ -17,7 +18,7 @@ export default function Router() {
       <main className="container MainContainer">
         <Navbar />
         <Switch>
-          <Route path="/customer-add">
+          <Route path="/customer/add">
             <CustomerAdd />
           </Route>
           <Route path="/customer">
@@ -35,8 +36,11 @@ export default function Router() {
           <Route path="/filter">
             <Filters />
           </Route>
-          <Route path="/product-add">
+          <Route path="/product/add">
             <ProductAdd />
+          </Route>
+          <Route path="/product/:id/edit">
+            <ProductEdit />
           </Route>
           <Route path="/product/:id">
             <ProductDetails />

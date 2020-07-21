@@ -18,13 +18,13 @@ export default function Customers() {
 
   const onClick = (e) => {
     e.preventDefault();
-    history.push('/customer-add');
+    history.push('/customer/add');
   };
 
   const onKeyDown = (e) => {
     e.preventDefault();
     if (e.keyCode === 13) {
-      history.push('/customer-add');
+      history.push('/customer/add');
     }
   };
 
