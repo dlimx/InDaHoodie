@@ -4,6 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 import './Navbar.css';
 import Icon from '../shared/Icon';
 import { useCart } from '../../store/CartProvider';
+import { getTotalQuantity } from '../../util/util';
 
 export default function Navbar() {
   const [cart] = useCart();
@@ -34,7 +35,7 @@ export default function Navbar() {
         </NavLink>
         <NavLink className="Navbar" activeClassName="NavbarActive" to="/cart">
           <Icon icon="fa-shopping-cart" />
-          <span> ({cart.items.length})</span>
+          <span> ({getTotalQuantity(cart.items)})</span>
         </NavLink>
       </div>
     </nav>

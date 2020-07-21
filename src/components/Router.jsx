@@ -4,7 +4,7 @@ import Navbar from './Navbar/Navbar';
 import Orders from './Orders/Orders';
 import ProductDetails from './ProductDetails/ProductDetails';
 import Products from './Products/Products';
-import ShoppingCart from './ShoppingCart/ShoppingCart';
+import OrderCart from './OrderCart/OrderCart';
 import Filters from './Filters/Filters';
 import ProductAdd from './ProductAdd/ProductAdd';
 import OrderDetails from './OrderDetails/OrderDetails';
@@ -30,7 +30,7 @@ export default function Router() {
             <Orders />
           </Route>
           <Route path="/cart">
-            <ShoppingCart />
+            <OrderCart />
           </Route>
           <Route path="/filter">
             <Filters />

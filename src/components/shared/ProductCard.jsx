@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 
-import './ProductCart.css';
+import './ProductCard.css';
 import Icon from './Icon';
-import { renderPrice } from '../../util/util';
+import { getPrice } from '../../util/util';
 
-export default function ProductCart({ product }) {
+export default function ProductCard({ product }) {
   const route = `/product/${product.id}`;
   const history = useHistory();
 
@@ -34,9 +34,9 @@ export default function ProductCart({ product }) {
       </div>
       <div className="ProductTextContainer">
         <Link to={route}>
-          <h5>{product.name}</h5>
+          <h4>{product.name}</h4>
         </Link>
-        <strong>${renderPrice(product.price)}</strong>
+        <strong>${getPrice(product.price)}</strong>
         {product.designer?.name ? <span>{product.designer.name}</span> : null}
         {product.categories?.length ? (
           <span>
@@ -48,7 +48,7 @@ export default function ProductCart({ product }) {
   );
 }
 
-ProductCart.propTypes = {
+ProductCard.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

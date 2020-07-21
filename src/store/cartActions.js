@@ -33,9 +33,8 @@ export const updateCart = (id, quantity) => {
   };
 };
 
-export const resetCart = (id) => {
+export const resetCart = () => {
   return {
     type: RESET_CART,
-    payload: { id },
   };
 };
