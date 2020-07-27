@@ -1,3 +1,12 @@
+
+/*** NOTE: ${:variableName} format being used to denote variables within app. ***/
+
+
+
+/*****************************************************
+** SELECT statements
+******************************************************/
+
 -- Query to get all customers
 SELECT *
 FROM Customers;
@@ -54,3 +63,62 @@ FROM Categories;
 -- Query to get all designers
 SELECT *
 FROM Designers;
+
+
+
+/*****************************************************
+** INSERT statements
+******************************************************/
+
+-- INSERT customer
+INSERT INTO Customers (first_name, last_name, birthdate, address, city, state, zip, created_at, updated_at, image) VALUES 
+(${:firstNameInput}, ${:lastNameInput}, ${:birthdateInput}, ${:addressInput}, ${:cityInput}, ${:stateInput}, ${:zipInput}, CURDATE(), CURDATE(), ${:imageInput});
+
+
+-- INSERT product and product_category relationship (done one right after the other)
+INSERT INTO Products (name, description, created_at, updated_at, image, price, designer_id) VALUES 
+(${:nameInput}, ${:descriptionInput}, CURDATE(), CURDATE(), ${:imageInput}, ${:priceInput}, (SELECT id FROM Designers WHERE name = ${:designerNameInput}));
+-- productIdInput will be captured after creating the product above
+INSERT INTO Products_Categories (product_id, category_id) VALUES
+(${:productIdInput}, (SELECT id FROM Categories WHERE name = ${:categoryNameInput}));
+
+
+-- INSERT order and order_product relationship (done one right after the other)
+INSERT INTO Orders (customer_id, created_at, updated_at, shipment_method, total_before_tax, tax_amount) VALUES 
+((SELECT id FROM Customers WHERE first_name = ${:firstNameInput}), CURDATE(), CURDATE(), ${:shipmentMethodInput}, ${:totalBeforeTaxInput}, ${:taxAmountInput});
+-- orderIdInput will be captured after creating the order above
+INSERT INTO Orders_Products (order_id, product_id, quantity) VALUES
+(${:orderIdInput}, (SELECT id FROM Products WHERE name=${:productNameInput}), ${:productQuantityInput});
+
+
+-- INSERT category
+INSERT INTO Categories (name) VALUES (${:nameInput});
+
+
+-- INSERT designer
+INSERT INTO Designers (name) VALUES (${:nameInput});
+
+
+
+/*****************************************************
+** UPDATE statements
+******************************************************/
+
+-- UPDATE product
+UPDATE Products
+SET name=${:nameUpdated}, description=${:descriptionUpdated}, updated_at=CURDATE(), image=${:imageUpdated}, price=${:priceUpdated}, designer_id=(SELECT id FROM Designers WHERE name=${:designerNameUpdated}) 
+WHERE id=${:productIdInput};
+
+
+
+/*****************************************************
+** DELETE statements
+******************************************************/
+
+-- DELETE product
+DELETE FROM Products WHERE id=${:productIdInput};
+
+-- DELETE product_category relationship
+DELETE FROM Products_Categories WHERE product_id=${:productIdInput} AND category_id=${:categoryIdInput};
+
+
