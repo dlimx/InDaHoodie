@@ -80,15 +80,15 @@ INSERT INTO Products (name, description, created_at, updated_at, image, price, d
 (${:nameInput}, ${:descriptionInput}, CURDATE(), CURDATE(), ${:imageInput}, ${:priceInput}, (SELECT id FROM Designers WHERE name = ${:designerNameInput}));
 -- productIdInput will be captured after creating the product above
 INSERT INTO Products_Categories (product_id, category_id) VALUES
-(${:productIdInput}, (SELECT id FROM Categories WHERE name = ${:categoryNameInput}));
+((SELECT LAST_INSERT_ID()), ${:categoryIdInput});
 
 
 -- INSERT order and order_product relationship (done one right after the other)
 INSERT INTO Orders (customer_id, created_at, updated_at, shipment_method, total_before_tax, tax_amount) VALUES 
-((SELECT id FROM Customers WHERE first_name = ${:firstNameInput}), CURDATE(), CURDATE(), ${:shipmentMethodInput}, ${:totalBeforeTaxInput}, ${:taxAmountInput});
+({$:customerIdInput}, CURDATE(), CURDATE(), ${:shipmentMethodInput}, ${:totalBeforeTaxInput}, ${:taxAmountInput});
 -- orderIdInput will be captured after creating the order above
 INSERT INTO Orders_Products (order_id, product_id, quantity) VALUES
-(${:orderIdInput}, (SELECT id FROM Products WHERE name=${:productNameInput}), ${:productQuantityInput});
+((SELECT LAST_INSERT_ID()), ${:productIdInput}, ${:productQuantityInput});
 
 
 -- INSERT category
