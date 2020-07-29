@@ -21,6 +21,7 @@
 # Google Drive adds Icon files to folders
 Icon?
 
+*.iml
 .idea
 
 npm-debug.log*
@@ -28,3 +29,6 @@ yarn-debug.log*
 yarn-error.log*
 
 yarn.lock
+
+# environment
+.env
