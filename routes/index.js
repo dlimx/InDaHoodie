@@ -1,21 +1,8 @@
 const express = require('express');
+const customerRouter = require('./customerRouter');
 
 const router = express.Router();
 
-/* GET api index page. */
-// TODO - drop star
-router.get('*', (req, res, next) => {
-  res.send('hello world');
-});
-/* POST api index */
-// TODO - drop star
-router.post('*', (req, res, next) => {
-  res.send({ name: 'hello world' });
-});
-/* PUT api index */
-// TODO - drop star
-router.put('*', (req, res, next) => {
-  res.send({ name: 'hello world' });
-});
+router.use('/customer', customerRouter);
 
 module.exports = router;

@@ -27,6 +27,10 @@ const createCustomer = async (data) => {
       data.birthdate,
     ],
   );
+  const result = await db.pool.asyncQuery(
+    `SELECT * FROM Customers WHERE id = (SELECT MAX(id) FROM Customers)`,
+  );
+  return result[0];
 };
 
 module.exports = {

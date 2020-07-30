@@ -21,7 +21,7 @@ export default function CustomerAd() {
     const schema = yup.object().shape({
       first_name: yup.string().required(),
       last_name: yup.string().required(),
-      birthdate: yup.date().required(),
+      birthdate: yup.date().nullable().default(null),
       address: yup.string(),
       city: yup.string(),
       zip: yup.string(),
@@ -76,9 +76,14 @@ export default function CustomerAd() {
       image,
       birthdate,
     };
+
+    if (!data.birthdate) {
+      data.birthdate = undefined;
+    }
+
     validate(data)
       .then((validatedData) => {
-        api.post('/customer', validatedData).then((apiData) => {
+        api.post('/customer/create', validatedData).then((apiData) => {
           setError('');
           history.push('/customer');
         });

@@ -9,11 +9,12 @@ import './Customers.css';
 export default function Customers() {
   const history = useHistory();
   const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/customer').then((data) => {
-      // TODO - use actual data
-      setCustomers(customerData);
+    api.get('/customer').then(({ data }) => {
+      setCustomers(data);
+      setLoading(false);
     });
   }, []);
 
