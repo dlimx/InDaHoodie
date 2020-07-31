@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { useHistory, Link } from 'react-router-dom';
 import './CustomerCard.css';
 import Icon from './Icon';
@@ -31,13 +32,15 @@ export default function CustomerCard({ customer, index }) {
         <h4>
           {customer.first_name} {customer.last_name}
         </h4>
-        <p>{customer.birthdate.toDateString()}</p>
+        {customer.birthdate && <p>{moment(customer.birthdate).format()}</p>}
         <div>
           <span>{customer.address}</span>
         </div>
         <div>
           <span>
-            {customer.city}, {customer.state}
+            {customer.city}
+            {!!customer.state && ', '}
+            {customer.state}
           </span>
         </div>
         <br />
@@ -55,7 +58,7 @@ CustomerCard.propTypes = {
     id: PropTypes.number.isRequired,
     first_name: PropTypes.string.isRequired,
     last_name: PropTypes.string.isRequired,
-    birthdate: PropTypes.instanceOf(Date),
+    birthdate: PropTypes.string,
     address: PropTypes.string,
     city: PropTypes.string,
     state: PropTypes.string,
