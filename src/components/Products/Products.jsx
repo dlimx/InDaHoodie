@@ -12,12 +12,12 @@ export default function Products() {
   const [activeProducts, setActiveProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const history = useHistory();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     api.get('/product').then(({ data }) => {
-      // TODO - replace with real data
-      setProducts(productData);
-      setActiveProducts(productData);
+      setProducts(data);
+      setLoading(false);
     });
   }, []);
 

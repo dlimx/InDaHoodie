@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import api from '../../api/api';
 
-export default function CustomerAd() {
+export default function CustomerAdd() {
   const history = useHistory();
 
   const [firstName, setFirstName] = useState('');
