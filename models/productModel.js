@@ -23,6 +23,10 @@ const createProduct = async (data) => {
       data.designer_id, // not entirely sure if we'll be passing this value from our front-end
     ],
   );
+  await db.pool.asyncQuery(
+    'INSERT INTO Products_Categories (product_id, category_id) VALUES ((SELECT LAST_INSERT_ID()), ?)',
+    [data.category_id],
+  );
   const result = await db.pool.asyncQuery(
     'SELECT * FROM Products WHERE id = (SELECT MAX(id) FROM Products)',
   );

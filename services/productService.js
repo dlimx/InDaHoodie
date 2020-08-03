@@ -35,6 +35,7 @@ const create = async (req, res, next) => {
     image: yup.string(),
     price: yup.number().positive().integer().required(),
     designer_id: yup.number(),
+    category_id: yup.number().required(),
   });
 
   schema
