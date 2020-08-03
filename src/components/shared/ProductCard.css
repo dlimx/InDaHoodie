@@ -12,6 +12,10 @@
   border: none;
 }
 
+.ProductCard:hover {
+  opacity: 70%;
+}
+
 .ProductIconContainer {
   height: 280px;
   width: 280px;

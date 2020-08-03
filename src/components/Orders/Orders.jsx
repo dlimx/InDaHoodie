@@ -21,6 +21,10 @@ export default function Orders() {
       <Helmet>
         <title>InDaHoodie | Orders</title>
       </Helmet>
+      <p>
+        To create a new order, add items into the cart and then save it as an
+        order.
+      </p>
       {orders.map((order, index) => (
         <OrderCard order={order} key={order.id} />
       ))}
