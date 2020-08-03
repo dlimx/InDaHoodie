@@ -19,11 +19,12 @@
 }
 
 .ProductAddCard {
-  border-style: dashed;
-  border-width: 2px;
   opacity: 50%;
+  color: white;
+  background-color: var(--color-primary);
 }
 
 .ProductAddCardText {
   opacity: 65%;
+  color: var(--color-primary);
 }

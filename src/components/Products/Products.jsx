@@ -6,6 +6,7 @@ import { productData } from '../../data/products';
 import ProductCard from '../shared/ProductCard';
 import './Products.css';
 import Icon from '../shared/Icon';
+import Loading from '../shared/Loading';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -57,25 +58,29 @@ export default function Products() {
           onChange={(e) => setSearchText(e.target.value)}
         />
       </div>
-      <div className="ProductsContainer">
-        {activeProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-        <div
-          className="ProductCard"
-          role="button"
-          onClick={onClickAdd}
-          onKeyDown={onKeyDownAdd}
-          tabIndex={0}
-        >
-          <div className="card ProductIconContainer ProductAddCard">
-            <Icon icon="fa-camera" className="fa-3x" />
-          </div>
-          <div className="ProductTextContainer ProductAddCardText">
-            <h5>Add New Product</h5>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="ProductsContainer">
+          {activeProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+          <div
+            className="ProductCard"
+            role="button"
+            onClick={onClickAdd}
+            onKeyDown={onKeyDownAdd}
+            tabIndex={0}
+          >
+            <div className="card ProductIconContainer ProductAddCard">
+              <Icon icon="fa-camera" className="fa-3x" />
+            </div>
+            <div className="ProductTextContainer ProductAddCardText">
+              <h5>Add New Product</h5>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

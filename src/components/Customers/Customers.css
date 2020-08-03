@@ -3,9 +3,23 @@
   align-items: center;
   justify-content: center;
   padding: 30px;
-  opacity: 60%;
+  opacity: 40%;
+  background-color: var(--color-primary);
+  color: white;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.CustomerAddCard:hover {
+  opacity: 30%;
 }
 
 .CustomerAddCardTitle {
   margin: 0;
+}
+
+.CustomersContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
