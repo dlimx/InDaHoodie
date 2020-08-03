@@ -1,6 +1,5 @@
 const yup = require('yup');
 const productModel = require('../models/productModel');
-const customerModel = require('../models/customerModel');
 
 const getAll = async (req, res, next) => {
   let data;
@@ -35,7 +34,7 @@ const create = async (req, res, next) => {
     image: yup.string(),
     price: yup.number().positive().integer().required(),
     designer_id: yup.number(),
-    category_id: yup.number().required(),
+    category_id: yup.array().of(yup.number()).required(),
   });
 
   schema
@@ -50,8 +49,46 @@ const create = async (req, res, next) => {
     });
 };
 
+const update = async (req, res, next) => {
+  const product = {
+    ...req.body,
+  };
+
+  const schema = yup.object().shape({
+    id: yup.number().required(),
+    name: yup.string().required(),
+    description: yup.string(),
+    image: yup.string(),
+    price: yup.number().positive().integer().required(),
+    designer_id: yup.number(),
+  });
+
+  schema
+    .validate(product)
+    .next(async (validatedProduct) => {
+      const updatedProduct = await productModel.updateProduct(validatedProduct);
+      res.status(200).send(updatedProduct);
+    })
+    .catch((error) => {
+      res.status(400);
+      res.send(error);
+    });
+};
+
+const deleteProduct = async (req, res, next) => {
+  try {
+    await productModel.deleteProduct(req.body.id); // req.params.id if passing query params
+    res.status(200);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 module.exports = {
   getAll,
   getProductById,
   create,
+  update,
+  deleteProduct,
 };
