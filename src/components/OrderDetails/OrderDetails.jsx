@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import moment from 'moment';
 import api from '../../api/api';
-import { orderData } from '../../data/orders';
-import { getPrice, getTotalQuantity } from '../../util/util';
+import { getTotalQuantity } from '../../util/util';
 import OrderProductCard from '../shared/OrderProductCard';
 
 export default function OrderDetails() {
@@ -12,11 +12,7 @@ export default function OrderDetails() {
 
   useEffect(() => {
     api.get(`/order/${id}`).then(({ data }) => {
-      // TODO - replace with real data
-      const mockData = orderData.filter(
-        (mockOrder) => mockOrder.id === Number.parseInt(id, 10),
-      )[0];
-      setOrder(mockData);
+      setOrder(data);
     });
   }, [id]);
 
@@ -31,10 +27,17 @@ export default function OrderDetails() {
       <strong>
         Total of {total} item{total === 1 ? '' : 's'}
       </strong>
+      {!!order.shipment_method && (
+        <p>
+          Shipped via {order.shipment_method}{' '}
+          {order.customer.address ? 'to' : ''} {order?.customer?.address}
+        </p>
+      )}
+      <p>Created on {moment(order.created_at).calendar()}</p>
+
       <p>
-        Shipped via {order.shipping} to {order?.customer?.address}
+        Total Cost: <strong>{order.total_before_tax + order.tax_amount}</strong>
       </p>
-      <p>Created on {order?.created_at?.toDateString()}</p>
 
       {order.products?.map((orderProduct) => (
         <OrderProductCard

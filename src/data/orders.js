@@ -10,7 +10,7 @@ export const orderData = [
       { product: productData[2], quantity: 1 },
     ],
     created_at: new Date(),
-    shipping: 'FedEx',
+    shipment_method: 'FedEx',
   },
   {
     id: 2,
@@ -20,6 +20,6 @@ export const orderData = [
       { product: productData[1], quantity: 1 },
     ],
     created_at: new Date(),
-    shipping: 'Pickup',
+    shipment_method: 'Pickup',
   },
 ];

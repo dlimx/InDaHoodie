@@ -3,16 +3,13 @@ import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import OrderCard from '../shared/OrderCard';
-import { orderData } from '../../data/orders';
 
 export default function Orders() {
-  const history = useHistory();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    api.get('/order').then((data) => {
-      // TODO - use actual data
-      setOrders(orderData);
+    api.get('/order').then(({ data }) => {
+      setOrders(data);
     });
   }, []);
 
@@ -22,7 +19,7 @@ export default function Orders() {
         <title>InDaHoodie | Orders</title>
       </Helmet>
       <p>
-        To create a a new order, add items into the cart and then save it as an
+        To create a new order, add items into the cart and then save it as an
         order.
       </p>
       {orders.map((order, index) => (

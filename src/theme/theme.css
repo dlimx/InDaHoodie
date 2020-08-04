@@ -71,6 +71,7 @@ code {
 :root {
   --color-white: #ffffff;
   --color-primary: #007bff;
+  --color-primary-hover: #0069d9;
   --color-secondary: #05b2dc;
   --color-tertiary: #c9cba3;
   --color-text: #464646;
@@ -82,4 +83,9 @@ code {
   --color-text-medium-hover: #fff;
   --color-grey: #ccc;
   --color-background-light: #fafafa;
+
+  --transition-opacity: opacity 0.15s ease-in-out;
+  --transition-color: color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }

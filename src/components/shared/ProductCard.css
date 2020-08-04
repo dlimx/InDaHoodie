@@ -4,15 +4,16 @@
   margin: 20px;
   flex: 1;
   align-items: center;
+  transition: var(--transition-opacity);
 }
 
-.ProductCard:active,
-.ProductCard:focus {
+.ProductCardRegular:active,
+.ProductCardRegular:focus {
   outline: 0;
   border: none;
 }
 
-.ProductCard:hover {
+.ProductCardRegular:hover {
   opacity: 70%;
 }
 

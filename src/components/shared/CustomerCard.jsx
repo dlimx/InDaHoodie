@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useHistory, Link } from 'react-router-dom';
 import './CustomerCard.css';
 import Icon from './Icon';
+import { getCustomerName } from '../../util/util';
 
 export default function CustomerCard({ customer, index }) {
   const history = useHistory();
@@ -29,10 +30,8 @@ export default function CustomerCard({ customer, index }) {
       onKeyDown={onKeyDown}
     >
       <div className="CustomerCardContent">
-        <h4>
-          {customer.first_name} {customer.last_name}
-        </h4>
-        {customer.birthdate && <p>{moment(customer.birthdate).format()}</p>}
+        <h4>{getCustomerName(customer)}</h4>
+        {customer.birthdate && <p>{moment(customer.birthdate).calendar()}</p>}
         <div>
           <span>{customer.address}</span>
         </div>
