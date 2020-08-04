@@ -18,7 +18,7 @@ const getProductsByIds = async (ids) => {
 };
 
 const createProduct = async (data) => {
-  await db.pool.asyncQuery(
+  const { insertId } = await db.pool.asyncQuery(
     'INSERT INTO Products (name, description, created_at, updated_at, image, price, designer_id) VALUES (?, ?, NOW(), NOW(), ?, ?, ?)',
     [
       data.name,
@@ -28,15 +28,15 @@ const createProduct = async (data) => {
       data.designer_id, // not entirely sure if we'll be passing this value from our front-end
     ],
   );
-  const savedProduct = await db.pool.asyncQuery(
-    'SELECT * FROM Products WHERE id = (SELECT MAX(id) FROM Products)', // or... WHERE id = (SELECT LAST_INSERT_ID())
-  );
+
+  // Create the Products_Categories relationship
   const productCategory = {
-    product_id: savedProduct[0].id,
+    product_id: insertId,
     category_id: data.category_id,
   };
   await productCategoryModel.createProductCategory(productCategory);
-  return savedProduct[0];
+
+  return getProductById(insertId);
 };
 
 // ASSUMPTION: we're passing from front-end all product values (modified or not) with UPDATE request
@@ -52,11 +52,7 @@ const updateProduct = async (data) => {
       data.id,
     ],
   );
-  const result = await db.pool.asyncQuery(
-    'SELECT * FROM Products WHERE id = ?',
-    [data.id],
-  );
-  return result[0];
+  return getProductById(data.id);
 };
 
 const deleteProduct = async (id) => {
