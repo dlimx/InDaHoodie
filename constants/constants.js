@@ -1,3 +1,3 @@
 module.exports = {
-  TAX_PERCENTAGE: 1.1,
+  TAX_PERCENTAGE: 0.1,
 };

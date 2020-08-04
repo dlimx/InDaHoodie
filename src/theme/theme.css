@@ -68,7 +68,7 @@ code {
   align-self: flex-end;
 }
 
-:root {
+html {
   --color-white: #ffffff;
   --color-primary: #007bff;
   --color-primary-hover: #0069d9;
