@@ -14,3 +14,6 @@ export const getTotalQuantity = (items = []) => {
     0,
   );
 };
+
+export const getCustomerName = (customer) =>
+  `${customer.first_name} ${customer.last_name}`;

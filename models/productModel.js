@@ -13,6 +13,10 @@ const getProductById = async (id) => {
   return product;
 };
 
+const getProductsByIds = async (ids) => {
+  return db.pool.asyncQuery('SELECT * FROM Products WHERE id IN ?', [[ids]]);
+};
+
 const createProduct = async (data) => {
   await db.pool.asyncQuery(
     'INSERT INTO Products (name, description, created_at, updated_at, image, price, designer_id) VALUES (?, ?, NOW(), NOW(), ?, ?, ?)',
@@ -62,6 +66,7 @@ const deleteProduct = async (id) => {
 module.exports = {
   getAll,
   getProductById,
+  getProductsByIds,
   createProduct,
   updateProduct,
   deleteProduct,

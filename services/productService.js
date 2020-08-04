@@ -7,7 +7,7 @@ const getAll = async (req, res, next) => {
     data = await productModel.getAll();
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     next(e);
   }
 };
@@ -18,7 +18,7 @@ const getProductById = async (req, res, next) => {
     data = await productModel.getProductById(req.params.id);
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     next(e);
   }
 };

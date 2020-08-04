@@ -19,12 +19,15 @@
 }
 
 .ProductAddCard {
-  opacity: 50%;
   color: white;
   background-color: var(--color-primary);
+  transition: var(--transition-color);
+}
+
+.ProductAddCard:hover {
+  background-color: var(--color-primary-hover);
 }
 
 .ProductAddCardText {
-  opacity: 65%;
   color: var(--color-primary);
 }

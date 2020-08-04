@@ -24,7 +24,7 @@ export default function ProductCard({ product }) {
 
   return (
     <div
-      className="ProductCard"
+      className="ProductCard ProductCardRegular"
       role="button"
       onClick={onClick}
       onKeyDown={onKeyDown}

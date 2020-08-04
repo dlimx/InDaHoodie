@@ -4,6 +4,7 @@
   margin: 20px;
   flex: 1;
   align-items: center;
+  transition: var(--transition-opacity);
 }
 
 .ProductCard:active,
@@ -12,8 +13,8 @@
   border: none;
 }
 
-.ProductCard:hover {
-  opacity: 70%;
+.ProductCardRegular:hover {
+  opacity: 0.7;
 }
 
 .ProductIconContainer {

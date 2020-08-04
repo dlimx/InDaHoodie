@@ -7,7 +7,7 @@ const getAll = async (req, res, next) => {
     data = await customerModel.getAll();
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     next(e);
   }
 };
@@ -18,7 +18,7 @@ const getCustomerById = async (req, res, next) => {
     data = await customerModel.getCustomerById(req.params.id);
     res.status(200).send(data);
   } catch (e) {
-    console.log(e);
+    console.error(e);
     next(e);
   }
 };

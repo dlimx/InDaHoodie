@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Storefront for an online streetwear brand",
   "scripts": {
-    "start": "node ./scripts/www",
+    "start": "NODE_ENV=production && node ./scripts/www",
     "build": "react-scripts build",
     "dev-fe": "react-scripts start",
     "dev-be": "nodemon ./scripts/www",
@@ -81,7 +81,7 @@
   },
   "proxy": "http://localhost:3001",
   "engines": {
-    "node": ">=12.0.0",
+    "node": ">=14.0.0",
     "npm": ">=6.0.0"
   }
 }

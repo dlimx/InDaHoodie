@@ -9,12 +9,14 @@ const getCustomerById = async (id) => {
     'SELECT * FROM Customers WHERE id = ?',
     [id],
   );
-  const user = data[0];
-  return user;
+  const customer = data[0];
+  return customer;
 };
 
 const createCustomer = async (data) => {
-  await db.pool.asyncQuery(
+  const {
+    insertId,
+  } = await db.pool.asyncQuery(
     'INSERT INTO Customers (first_name, last_name, address, city, state, zip, image, birthdate, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
     [
       data.first_name,
@@ -27,10 +29,7 @@ const createCustomer = async (data) => {
       data.birthdate,
     ],
   );
-  const result = await db.pool.asyncQuery(
-    `SELECT * FROM Customers WHERE id = (SELECT MAX(id) FROM Customers)`,
-  );
-  return result[0];
+  return getCustomerById(insertId);
 };
 
 module.exports = {
