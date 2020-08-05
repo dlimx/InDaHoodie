@@ -38,7 +38,7 @@ export default function Filters() {
   const onCategorySubmit = (e) => {
     e.preventDefault();
     if (!categoryName || !categoryName.trim()) return;
-    api.post('/category', { name: categoryName }).then(({ data }) => {
+    api.post('/category/create', { name: categoryName }).then(({ data }) => {
       setCategories([...categories, data]);
       setCategoryName('');
     });
@@ -47,7 +47,7 @@ export default function Filters() {
   const onDesignerSubmit = (e) => {
     e.preventDefault();
     if (!designerName || !designerName.trim()) return;
-    api.post('/designer', { name: designerName }).then(({ data }) => {
+    api.post('/designer/create', { name: designerName }).then(({ data }) => {
       setDesigners([...designers, data]);
       setDesignerName('');
     });

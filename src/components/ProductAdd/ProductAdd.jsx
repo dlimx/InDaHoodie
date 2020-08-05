@@ -9,7 +9,7 @@ export default function ProductAdd() {
   const history = useHistory();
 
   const onSubmit = (validatedData) => {
-    api.post('/product', validatedData).then((apiData) => {
+    api.post('/product/create', validatedData).then((apiData) => {
       history.push('/');
     });
   };
