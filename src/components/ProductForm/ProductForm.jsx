@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
 import { getPrice } from '../../util/util';
+import api from '../../api/api';
 
 export default function ProductForm({
   onSubmit: onSubmitProp,
@@ -15,7 +16,7 @@ export default function ProductForm({
   const [description, setDescription] = useState(
     initialValues?.description ?? '',
   );
-  const [designer, setDesigner] = useState(initialValues?.designer?.name ?? '');
+  // const [designer, setDesigner] = useState(initialValues?.designer?.name ?? '');
   const [category, setCategory] = useState(() =>
     initialValues?.categories
       ?.map((initialCategory) => initialCategory.name)
@@ -26,12 +27,23 @@ export default function ProductForm({
     initialValues?.price ? getPrice(initialValues.price) : '',
   );
   const [error, setError] = useState('');
+  const [designers, setDesigners] = useState([]);
+  const [selectedDesigner, setSelectedDesigner] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // maybe I can ditched this GET request and utilize designer and setDesigner (initialValues)
+    api.get('/designer').then(({ data }) => {
+      setDesigners(data);
+      setLoading(false); // not sure if needed, copied from users example in OrderCart.jsx
+    });
+  }, []);
 
   const validate = (data) => {
     const schema = yup.object().shape({
       name: yup.string().required(),
       description: yup.string(),
-      designer: yup.string(),
+      designer_id: yup.number(), // need to be updated to designer_id?
       category: yup.string(),
       image: yup.string(),
       price: yup.number().required(),
@@ -50,10 +62,6 @@ export default function ProductForm({
   const onDescriptionChange = (e) => {
     e.preventDefault();
     setDescription(e.target.value);
-  };
-  const onDesignerChange = (e) => {
-    e.preventDefault();
-    setDesigner(e.target.value);
   };
   const onCategoryChange = (e) => {
     e.preventDefault();
@@ -78,7 +86,7 @@ export default function ProductForm({
     const data = {
       name,
       description,
-      designer,
+      designer_id: selectedDesigner,
       category,
       price,
     };
@@ -116,13 +124,23 @@ export default function ProductForm({
             onChange={onPriceChange}
           />
         </div>
-        <input
-          type="text"
-          className="form-control AddFormInput"
-          placeholder="Designer"
-          value={designer}
-          onChange={onDesignerChange}
-        />
+        <div className="form-group">
+          <label htmlFor="designer">Designer</label>
+          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          <select
+            className="form-control"
+            id="designer"
+            value={selectedDesigner}
+            onChange={(e) => setSelectedDesigner(e.target.value)}
+          >
+            <option />
+            {designers.map((designer) => (
+              <option key={designer.id} value={designer.id}>
+                {designer.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <input
           type="text"
           className="form-control AddFormInput"
@@ -158,7 +176,7 @@ ProductForm.propTypes = {
     description: PropTypes.string,
     price: PropTypes.number,
     image: PropTypes.string,
-    designer: PropTypes.object,
+    designer: PropTypes.object, // does this need to be updated?
     categories: PropTypes.array,
   }),
   onCancel: PropTypes.func,

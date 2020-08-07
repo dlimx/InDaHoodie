@@ -56,6 +56,33 @@ FROM Orders
          LEFT JOIN Products P on OP.product_id = P.id
          LEFT JOIN Customers C on Orders.customer_id = C.id;
 
+-- Query to get all orders (SECOND VERSION)
+SELECT  Orders.id, 
+        Orders.customer_id, 
+        Orders.created_at, 
+        Orders.updated_at, 
+        Orders.shipment_method, 
+        Orders.total_before_tax, 
+        Orders.tax_amount,
+        Customers.address, 
+        Customers.id, 
+        Customers.address, 
+        Customers.birthdate, 
+        Customers.city, 
+        Customers.created_at, 
+        Customers.first_name, 
+        Customers.last_name, 
+        Customers.image, 
+        Customers.state, 
+        Customers.zip, 
+        Customers.updated_at,
+        SUM(Orders_Products.quantity) as product_count
+FROM Orders
+        LEFT JOIN Orders_Products ON Orders.id = Orders_Products.order_id
+        LEFT JOIN Customers ON Orders.customer_id = Customers.id
+        LEFT JOIN Products ON Orders_Products.product_id = Products.id
+GROUP BY Orders.id
+
 -- Query to get all categories
 SELECT *
 FROM Categories;

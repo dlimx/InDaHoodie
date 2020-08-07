@@ -21,7 +21,7 @@ export default function Filters() {
 
     api.get(`/designer`).then(({ data }) => {
       // TODO - replace with real data
-      setDesigners(designerData);
+      setDesigners(data);
     });
   }, []);
 
