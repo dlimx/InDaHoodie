@@ -16,19 +16,15 @@ export default function ProductForm({
   const [description, setDescription] = useState(
     initialValues?.description ?? '',
   );
-  // const [designer, setDesigner] = useState(initialValues?.designer?.name ?? '');
-  const [category, setCategory] = useState(() =>
-    initialValues?.categories
-      ?.map((initialCategory) => initialCategory.name)
-      .join(', '),
-  );
   const [image, setImage] = useState(initialValues?.image ?? '');
   const [price, setPrice] = useState(
     initialValues?.price ? getPrice(initialValues.price) : '',
   );
-  const [error, setError] = useState('');
   const [designers, setDesigners] = useState([]);
   const [selectedDesigner, setSelectedDesigner] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,12 +35,20 @@ export default function ProductForm({
     });
   }, []);
 
+  useEffect(() => {
+    // maybe I can ditched this GET request and utilize designer and setDesigner (initialValues)
+    api.get('/category').then(({ data }) => {
+      setCategories(data);
+      setLoading(false); // not sure if needed, copied from users example in OrderCart.jsx
+    });
+  }, []);
+
   const validate = (data) => {
     const schema = yup.object().shape({
       name: yup.string().required(),
       description: yup.string(),
-      designer_id: yup.number(), // need to be updated to designer_id?
-      category: yup.string(),
+      designer_id: yup.number(),
+      category_ids: yup.array().of(yup.number()).required(),
       image: yup.string(),
       price: yup.number().required(),
     });
@@ -62,10 +66,6 @@ export default function ProductForm({
   const onDescriptionChange = (e) => {
     e.preventDefault();
     setDescription(e.target.value);
-  };
-  const onCategoryChange = (e) => {
-    e.preventDefault();
-    setCategory(e.target.value);
   };
   const onImageChange = (e) => {
     e.preventDefault();
@@ -87,7 +87,7 @@ export default function ProductForm({
       name,
       description,
       designer_id: selectedDesigner,
-      category,
+      category_ids: selectedCategories,
       price,
     };
     validate(data)
@@ -141,13 +141,27 @@ export default function ProductForm({
             ))}
           </select>
         </div>
-        <input
-          type="text"
-          className="form-control AddFormInput"
-          placeholder="Category(s)"
-          value={category}
-          onChange={onCategoryChange}
-        />
+        <div className="form-group">
+          <label htmlFor="category">Category</label>
+          {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+          <select
+            className="form-control"
+            id="category"
+            value={selectedCategories}
+            onChange={(e) =>
+              setSelectedCategories([...selectedCategories, e.target.value])
+            }
+            multiple
+          >
+            <option />
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <input
           type="text"
           className="form-control AddFormInput"
