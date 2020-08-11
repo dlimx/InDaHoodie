@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import api from '../../api/api';
 import { categoryData } from '../../data/categories';
-import { designerData } from '../../data/designers';
 
 export default function Filters() {
   const [categories, setCategories] = useState([]);
@@ -20,7 +19,6 @@ export default function Filters() {
     });
 
     api.get(`/designer`).then(({ data }) => {
-      // TODO - replace with real data
       setDesigners(data);
     });
   }, []);
