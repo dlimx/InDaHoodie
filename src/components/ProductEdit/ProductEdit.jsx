@@ -3,7 +3,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useCart } from '../../store/CartProvider';
 import api from '../../api/api';
-import { productData } from '../../data/products';
 import ProductForm from '../ProductForm/ProductForm';
 
 export default function ProductEdit() {
@@ -14,11 +13,7 @@ export default function ProductEdit() {
 
   useEffect(() => {
     api.get(`/product/${id}`).then(({ data }) => {
-      // TODO - replace with real data
-      const mockData = productData.filter(
-        (mockProduct) => mockProduct.id === Number.parseInt(id, 10),
-      )[0];
-      setProduct(mockData);
+      setProduct(data);
       setLoaded(true);
     });
   }, [id]);

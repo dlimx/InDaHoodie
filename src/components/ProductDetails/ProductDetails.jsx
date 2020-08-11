@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import api from '../../api/api';
-import { productData } from '../../data/products';
 import Icon from '../shared/Icon';
 import './ProductDetails.css';
 import { useCart } from '../../store/CartProvider';
@@ -19,11 +18,7 @@ export default function ProductDetails() {
 
   useEffect(() => {
     api.get(`/product/${id}`).then(({ data }) => {
-      // TODO - replace with real data
-      const mockData = productData.filter(
-        (mockProduct) => mockProduct.id === Number.parseInt(id, 10),
-      )[0];
-      setProduct(mockData);
+      setProduct(data);
     });
   }, [id]);
 

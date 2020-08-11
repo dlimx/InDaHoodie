@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import api from '../../api/api';
-import { productData } from '../../data/products';
 import ProductCard from '../shared/ProductCard';
 import './Products.css';
 import Icon from '../shared/Icon';
