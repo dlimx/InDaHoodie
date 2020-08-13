@@ -3,7 +3,6 @@ import './Filters.css';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import api from '../../api/api';
-import { categoryData } from '../../data/categories';
 
 export default function Filters() {
   const [categories, setCategories] = useState([]);
@@ -14,8 +13,7 @@ export default function Filters() {
 
   useEffect(() => {
     api.get(`/category`).then(({ data }) => {
-      // TODO - replace with real data
-      setCategories(categoryData);
+      setCategories(data);
     });
 
     api.get(`/designer`).then(({ data }) => {
@@ -62,7 +60,7 @@ export default function Filters() {
           <Link
             key={category.id}
             className="FilterItem"
-            to={`/search?categories=${category.id}`}
+            to={`/search?categories=${category.id}`} // should this be `/category/${category.id}`? Or no link at all?
           >
             {category.name}
           </Link>
@@ -94,7 +92,7 @@ export default function Filters() {
           <Link
             key={designer.id}
             className="FilterItem"
-            to={`/search?designer=${designer.id}`}
+            to={`/search?designer=${designer.id}`} // should this be `/designer/${designer.id}`? Or no link at all?
           >
             {designer.name}
           </Link>

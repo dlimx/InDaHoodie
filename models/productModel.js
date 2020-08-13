@@ -30,11 +30,14 @@ const createProduct = async (data) => {
   );
 
   // Create the Products_Categories relationship
-  const productCategory = {
-    product_id: insertId,
-    category_id: data.category_id,
-  };
-  await productCategoryModel.createProductCategory(productCategory);
+  const productCategoryQueries = data.category_ids.map((id) => {
+    const productCategory = {
+      product_id: insertId, // insertId is id from product INSERTed above
+      category_id: id,
+    };
+    return productCategoryModel.createProductCategory(productCategory);
+  });
+  await Promise.all(productCategoryQueries);
 
   return getProductById(insertId);
 };

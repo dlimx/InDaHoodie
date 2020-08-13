@@ -28,13 +28,15 @@ const create = async (req, res, next) => {
     ...req.body,
   };
 
+  console.log(req.body); // for testing
+
   const schema = yup.object().shape({
     name: yup.string().required(),
     description: yup.string(),
     image: yup.string(),
     price: yup.number().positive().integer().required(),
     designer_id: yup.number(),
-    category_id: yup.array().of(yup.number()).required(),
+    category_ids: yup.array().of(yup.number()).required(),
   });
 
   schema
@@ -45,6 +47,7 @@ const create = async (req, res, next) => {
     })
     .catch((error) => {
       res.status(400);
+      console.error(error); // for testing
       res.send(error);
     });
 };
