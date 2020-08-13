@@ -10,6 +10,13 @@
   max-width: 100%;
 }
 
+.ProductsCategoryContainer {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .ProductIconContainer {
   height: 280px;
   width: 280px;
@@ -30,4 +37,29 @@
 
 .ProductAddCardText {
   color: var(--color-primary);
+}
+
+.ProductsFilterItem {
+  background-color: var(--color-white);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--color-primary);
+  border-radius: 4px;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+}
+
+.ProductsFilterItem:hover {
+  border-color: var(--color-primary-hover);
+}
+
+.ProductsFilterItemActive {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.ProductsFilterItemActive:hover {
+  background-color: var(--color-primary-hover);
+  color: var(--color-white);
 }

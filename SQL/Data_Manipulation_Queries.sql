@@ -11,22 +11,53 @@
 SELECT *
 FROM Customers;
 
--- Query to get all products
-SELECT Products.id          as id,
-       Products.name        as name,
-       Products.description as description,
-       Products.image       as image,
-       Products.created_at  as created_at,
-       Products.updated_at  as updated_at,
-       Products.price       as price,
-       Products.designer_id as designer_id,
-       PC.category_id       as category_id,
-       C.name               as category_name,
-       D.name               as designer_name
+-- Query to search all products
+-- The WHERE clause will be dynamically generated based on the user submitted filters
+SELECT Products.id,
+       Products.name,
+       Products.description,
+       Products.image,
+       Products.created_at,
+       Products.updated_at,
+       Products.price,
+       Designers.name,
+       Designers.id,
+       JSON_ARRAYAGG(
+               JSON_OBJECT(
+                       "id", Categories.id,
+                       "name", Categories.name
+                   )
+           ) as categories
 FROM Products
-         LEFT JOIN Products_Categories PC on Products.id = PC.product_id
-         LEFT JOIN Categories C on PC.category_id = C.id
-         LEFT JOIN Designers D on Products.designer_id = D.id;
+         LEFT JOIN Products_Categories on Products.id = Products_Categories.product_id
+         LEFT JOIN Categories on Products_Categories.category_id = Categories.id
+         LEFT JOIN Designers on Products.designer_id = Designers.id
+WHERE Products.name LIKE ${:productNameInput}
+AND Products_Categories.category_id = ${:categoryIdInput}
+AND Products.designer_id = ${:designerIdInput}
+GROUP BY Products.id;
+
+-- Query to get specific product
+SELECT Products.id,
+       Products.name,
+       Products.description,
+       Products.image,
+       Products.created_at,
+       Products.updated_at,
+       Products.price,
+       Designers.name,
+       Designers.id,
+       JSON_ARRAYAGG(
+               JSON_OBJECT(
+                       "id", Categories.id,
+                       "name", Categories.name
+                   )
+           ) as categories
+FROM Products
+         LEFT JOIN Products_Categories on Products.id = Products_Categories.product_id
+         LEFT JOIN Categories on Products_Categories.category_id = Categories.id
+         LEFT JOIN Designers on Products.designer_id = Designers.id
+WHERE Products.id = ${:productIdInput};
 
 -- Query to get all orders
 SELECT Orders.id               as id,
@@ -81,7 +112,30 @@ FROM Orders
         LEFT JOIN Orders_Products ON Orders.id = Orders_Products.order_id
         LEFT JOIN Customers ON Orders.customer_id = Customers.id
         LEFT JOIN Products ON Orders_Products.product_id = Products.id
-GROUP BY Orders.id
+GROUP BY Orders.id;
+
+-- Query to get specific order
+SELECT Orders.id,Orders.customer_id, Orders.created_at, Orders.updated_at, Orders.shipment_method, Orders.total_before_tax, Orders.tax_amount,
+       Customers.address, Customers.id, Customers.address, Customers.birthdate, Customers.city, Customers.created_at, Customers.first_name, Customers.last_name, Customers.image, Customers.state, Customers.zip, Customers.updated_at,
+       JSON_ARRAYAGG(
+               JSON_OBJECT(
+                       "id", Products.id, "quantity",
+                       Orders_Products.quantity,
+                       "product", JSON_OBJECT(
+                               "id", Products.id,
+                               "name", Products.name,
+                               "description", Products.description,
+                               "image", Products.image,
+                               "created_at", Products.created_at,
+                               "updated_at", Products.updated_at
+                           )
+                   )
+           ) as products
+FROM Orders
+         LEFT JOIN Orders_Products ON Orders.id = Orders_Products.order_id
+         LEFT JOIN Customers ON Orders.customer_id = Customers.id
+         LEFT JOIN Products ON Orders_Products.product_id = Products.id
+WHERE Orders.id = ${:orderIdInput};
 
 -- Query to get all categories
 SELECT *
