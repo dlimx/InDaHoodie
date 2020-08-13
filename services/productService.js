@@ -4,7 +4,7 @@ const productModel = require('../models/productModel');
 const getAll = async (req, res, next) => {
   let data;
   try {
-    data = await productModel.getAll();
+    data = await productModel.search(req.query);
     res.status(200).send(data);
   } catch (e) {
     console.error(e);

@@ -60,7 +60,7 @@ export default function Filters() {
           <Link
             key={category.id}
             className="FilterItem"
-            to={`/search?categories=${category.id}`} // should this be `/category/${category.id}`? Or no link at all?
+            to={`/search?category=${category.id}`}
           >
             {category.name}
           </Link>
