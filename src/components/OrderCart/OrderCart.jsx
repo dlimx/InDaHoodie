@@ -81,7 +81,7 @@ export default function OrderCart() {
           value={selectedCustomer}
           onChange={(e) => setSelectedCustomer(e.target.value)}
         >
-          <option />
+          <option value="">Select Customer</option>
           {customers.map((customer) => (
             <option key={customer.id} value={customer.id}>
               {getCustomerName(customer)}

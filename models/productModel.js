@@ -129,6 +129,17 @@ const updateProduct = async (data) => {
       data.id,
     ],
   );
+  // Reset the Products_Categories relationship
+  await productCategoryModel.deleteAllProductCategories(data.id);
+  const productCategoryQueries = data.category_ids.map((id) => {
+    const productCategory = {
+      product_id: data.id, // insertId is id from product INSERTed above
+      category_id: id,
+    };
+    return productCategoryModel.createProductCategory(productCategory);
+  });
+  await Promise.all(productCategoryQueries);
+
   return getProductById(data.id);
 };
 

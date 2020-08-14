@@ -65,6 +65,20 @@ export default function ProductDetails() {
     history.push(`/product/${id}/edit`);
   };
 
+  const onDelete = (e) => {
+    e.preventDefault();
+    console.log('hi');
+    api
+      .delete(`/product/delete/${id}`)
+      .then(() => {
+        console.log('hi');
+        history.push('/');
+      })
+      .catch(() => {
+        console.log('hi');
+      });
+  };
+
   return (
     <div className="ProductDetailsContainer">
       <Helmet>
@@ -76,11 +90,16 @@ export default function ProductDetails() {
       <div className="ProductDetailsText">
         <div className="Row RowSpaced">
           <h2>{product.name}</h2>
-          <button type="button" onClick={onEdit} className="btn btn-outline">
-            <Icon icon="fa-edit" className="fa-2x" />
-          </button>
         </div>
         <strong>${getPrice(product.price)}</strong>
+        <div className="Row">
+          <button type="button" onClick={onEdit} className="btn btn-outline">
+            <Icon icon="fa-edit" className="fa-lg" />
+          </button>
+          <button type="button" onClick={onDelete} className="btn btn-outline">
+            <Icon icon="fa-trash" className="fa-lg" style={{ color: 'red' }} />
+          </button>
+        </div>
         <br />
         <p>{product.description}</p>
         <br />

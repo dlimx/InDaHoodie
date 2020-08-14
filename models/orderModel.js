@@ -42,8 +42,8 @@ const getOrderById = async (id) => {
             Customers.address, Customers.id, Customers.address, Customers.birthdate, Customers.city, Customers.created_at, Customers.first_name, Customers.last_name, Customers.image, Customers.state, Customers.zip, Customers.updated_at,
             JSON_ARRAYAGG(
                 JSON_OBJECT(
-                    "id", Products.id, "quantity",
-                    Orders_Products.quantity,
+                    "id", Orders_Products.id,
+                    "quantity", Orders_Products.quantity,
                     "product", JSON_OBJECT(
                         "id", Products.id,
                         "name", Products.name,

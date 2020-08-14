@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
+import { uniq } from 'lodash';
 import { getPrice } from '../../util/util';
 import api from '../../api/api';
 
@@ -21,9 +22,15 @@ export default function ProductForm({
     initialValues?.price ? getPrice(initialValues.price) : '',
   );
   const [designers, setDesigners] = useState([]);
-  const [selectedDesigner, setSelectedDesigner] = useState('');
+  const [selectedDesigner, setSelectedDesigner] = useState(
+    initialValues?.designer?.id ?? '',
+  );
   const [categories, setCategories] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(
+    initialValues?.categories?.length
+      ? initialValues.categories.map((category) => category.id)
+      : [],
+  );
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -44,13 +51,17 @@ export default function ProductForm({
   }, []);
 
   const validate = (data) => {
+    setError('');
     const schema = yup.object().shape({
       name: yup.string().required(),
       description: yup.string(),
       designer_id: yup.number(),
       category_ids: yup.array().of(yup.number()).required(),
       image: yup.string(),
-      price: yup.number().required(),
+      price: yup
+        .string()
+        .matches(/^[0-9]*(?:\.[0-9]{0,4})?$/, 'Please enter a valid price')
+        .required(),
     });
     return schema.validate(data);
   };
@@ -86,8 +97,8 @@ export default function ProductForm({
     const data = {
       name,
       description,
-      designer_id: selectedDesigner,
-      category_ids: selectedCategories,
+      designer_id: selectedDesigner || null,
+      category_ids: selectedCategories.filter((category) => !!category),
       price,
     };
     validate(data)
@@ -131,9 +142,11 @@ export default function ProductForm({
             className="form-control"
             id="designer"
             value={selectedDesigner}
-            onChange={(e) => setSelectedDesigner(e.target.value)}
+            onChange={(e) => {
+              setSelectedDesigner(e.target.value);
+            }}
           >
-            <option />
+            <option value="">Select Designer</option>
             {designers.map((designer) => (
               <option key={designer.id} value={designer.id}>
                 {designer.name}
@@ -149,11 +162,12 @@ export default function ProductForm({
             id="category"
             value={selectedCategories}
             onChange={(e) =>
-              setSelectedCategories([...selectedCategories, e.target.value])
+              setSelectedCategories(
+                uniq([...selectedCategories, e.target.value]),
+              )
             }
             multiple
           >
-            <option />
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}

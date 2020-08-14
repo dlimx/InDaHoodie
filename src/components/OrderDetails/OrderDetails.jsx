@@ -36,14 +36,14 @@ export default function OrderDetails() {
       <p>Created on {moment(order.created_at).calendar()}</p>
 
       <p>
-        Total Cost: <strong>{order.total_before_tax + order.tax_amount}</strong>
+        Tax: <strong>${order.tax_amount}</strong>
+      </p>
+      <p>
+        Total: <strong>${order.total_before_tax + order.tax_amount}</strong>
       </p>
 
       {order.products?.map((orderProduct) => (
-        <OrderProductCard
-          key={orderProduct.product.id}
-          orderProduct={orderProduct}
-        />
+        <OrderProductCard key={orderProduct.id} orderProduct={orderProduct} />
       ))}
     </div>
   );
