@@ -82,6 +82,16 @@ export default function ProductForm({
     e.preventDefault();
     setImage(e.target.value);
   };
+  const onCategoryChange = (e) => {
+    e.preventDefault();
+    if (selectedCategories.includes(e.target.value)) {
+      setSelectedCategories(
+        selectedCategories.filter((value) => value !== e.target.value),
+      );
+    } else {
+      setSelectedCategories(uniq([...selectedCategories, e.target.value]));
+    }
+  };
 
   const onCancel = (e) => {
     e.preventDefault();
@@ -161,11 +171,7 @@ export default function ProductForm({
             className="form-control"
             id="category"
             value={selectedCategories}
-            onChange={(e) =>
-              setSelectedCategories(
-                uniq([...selectedCategories, e.target.value]),
-              )
-            }
+            onChange={onCategoryChange}
             multiple
           >
             {categories.map((category) => (
