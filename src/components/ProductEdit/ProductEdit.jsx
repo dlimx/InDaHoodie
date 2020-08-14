@@ -19,7 +19,7 @@ export default function ProductEdit() {
   }, [id]);
 
   const onSubmit = (validatedData) => {
-    api.put(`/product/${id}`, validatedData).then(({ data }) => {
+    api.put(`/product/update/${id}`, validatedData).then(({ data }) => {
       history.push(`/product/${id}`);
     });
   };

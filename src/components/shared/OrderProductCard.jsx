@@ -157,13 +157,14 @@ export default function OrderProductCard({ orderProduct, editable }) {
 
 OrderProductCard.propTypes = {
   orderProduct: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
     product: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      id: PropTypes.number,
+      name: PropTypes.string,
       categories: PropTypes.array,
       designer: PropTypes.object,
-    }).isRequired,
+    }),
   }),
   editable: PropTypes.bool,
 };

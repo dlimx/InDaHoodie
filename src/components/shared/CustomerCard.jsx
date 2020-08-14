@@ -43,7 +43,7 @@ export default function CustomerCard({ customer, index }) {
           </span>
         </div>
         <br />
-        <Link to={route}>View customer orders</Link>
+        <Link to={route}>View all orders</Link>
       </div>
       <div className="CustomerCardImage">
         <Icon icon="fa-camera" className="fa-4x" />

@@ -7,6 +7,6 @@ productRouter.get('/', productService.getAll);
 productRouter.get('/:id', productService.getProductById);
 productRouter.post('/create', productService.create);
 productRouter.put('/update/:id', productService.update);
-productRouter.delete('/delete', productService.deleteProduct);
+productRouter.delete('/delete/:id', productService.deleteProduct);
 
 module.exports = productRouter;

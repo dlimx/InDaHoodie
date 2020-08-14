@@ -94,7 +94,7 @@ export default function Products() {
                   ? 'ProductsFilterItemActive'
                   : ''
               }`}
-              to={`/search?designer=${category.id}`}
+              to={`/search?category=${category.id}`}
             >
               {category.name}
             </Link>

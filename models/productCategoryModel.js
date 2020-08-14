@@ -14,7 +14,15 @@ const deleteProductCategory = async (data) => {
   );
 };
 
+const deleteAllProductCategories = async (productId) => {
+  await db.pool.asyncQuery(
+    'DELETE FROM Products_Categories WHERE product_id = ?',
+    [productId],
+  );
+};
+
 module.exports = {
   createProductCategory,
   deleteProductCategory,
+  deleteAllProductCategories,
 };
